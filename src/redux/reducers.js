@@ -1,9 +1,7 @@
-// reducers.js
 import { createSlice } from '@reduxjs/toolkit';
 
-// Начальное состояние
 const initialState = {
-  items: [], // Массив объектов
+  items: [], 
 };
 
 const plannerSlice = createSlice({

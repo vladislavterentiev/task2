@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import plannerReducer from './reducers';
 import ApiService from '../services/ApiService';
 
-
 const store = configureStore({
   reducer: {
     planner: plannerReducer, 

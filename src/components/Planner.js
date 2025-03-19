@@ -6,7 +6,6 @@ import Board from './Board';
 const Planner = () => {
   const [boardItems, setBoardItems] = useState([]);
 
-  // Добавление объекта на доску
   const handleAddItem = (item, x, y) => {
     const newItem = {
       id: uuidv4(),
@@ -19,7 +18,6 @@ const Planner = () => {
     setBoardItems((prevItems) => [...prevItems, newItem]);
   };
 
-  // Обновление позиции объекта
   const updateItemPosition = (id, x, y) => {
     setBoardItems((prevItems) =>
       prevItems.map((item) =>
@@ -28,12 +26,10 @@ const Planner = () => {
     );
   };
 
-  // Удаление объекта
   const handleDeleteItem = (id) => {
     setBoardItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  // Сохранение текущей расстановки в файл
   const handleExport = () => {
     const dataToExport = boardItems.map((item) => ({
       id: item.id,
@@ -50,13 +46,12 @@ const Planner = () => {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'planner-layout.json'; // Имя файла
+    a.download = 'planner-layout.json'; 
     a.click();
 
     URL.revokeObjectURL(url);
   };
 
-  // Загрузка расстановки из файла
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -66,7 +61,7 @@ const Planner = () => {
       try {
         const importedData = JSON.parse(event.target.result);
 
-        // Проверяем формат данных
+        // check structure of input date
         if (
           Array.isArray(importedData) &&
           importedData.every(
@@ -79,7 +74,7 @@ const Planner = () => {
               typeof item.y === 'number'
           )
         ) {
-          // Обновляем состояние boardItems
+         
           setBoardItems(importedData);
         } else {
           alert('Неверный формат файла');
@@ -94,11 +89,10 @@ const Planner = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Боковая панель с объектами */}
       <ObjectList
         onAddItem={handleAddItem}
-        onSave={handleExport} // Передаем функцию сохранения
-        onLoad={handleFileUpload} // Передаем функцию загрузки
+        onSave={handleExport} 
+        onLoad={handleFileUpload} 
       />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Board

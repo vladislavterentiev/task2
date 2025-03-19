@@ -17,7 +17,6 @@ const Board = ({ items, onAddItem, onUpdatePosition, onDeleteItem }) => {
     setOffset({ x: offsetX, y: offsetY });
   };
 
-
   useEffect(() => {
     if (!draggingItemId) return;
 
